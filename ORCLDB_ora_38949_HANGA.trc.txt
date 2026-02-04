@@ -1,0 +1,229 @@
+Trace file /u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_38949_HANGA.trc
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.22.0.0.0
+Build label:    RDBMS_19.22.0.0.0DBRU_LINUX.X64_231229
+ORACLE_HOME:    /u01/app/oracle/product/19.0.0/dbhome_1
+System name:	Linux
+Node name:	oel890-db
+Release:	5.15.0-200.131.27.el8uek.x86_64
+Version:	#2 SMP Wed Oct 4 22:19:10 PDT 2023
+Machine:	x86_64
+CLID:	P
+Instance name: ORCLDB
+Redo thread mounted by this instance: 1
+Oracle process number: 68
+Unix process pid: 38949, image: oracle@oel890-db (TNS V1-V3)
+
+
+*** 2026-02-03T20:29:30.269361+05:30
+*** SESSION ID:(63.25012) 2026-02-03T20:29:30.269394+05:30
+*** CLIENT ID:() 2026-02-03T20:29:30.269409+05:30
+*** SERVICE NAME:(SYS$USERS) 2026-02-03T20:29:30.269419+05:30
+*** MODULE NAME:(sqlplus@oel890-db (TNS V1-V3)) 2026-02-03T20:29:30.269430+05:30
+*** ACTION NAME:() 2026-02-03T20:29:30.269443+05:30
+*** CLIENT DRIVER:(SQL*PLUS) 2026-02-03T20:29:30.269452+05:30
+ 
+Processing Oradebug command 'setmypid'
+
+*** 2026-02-03T20:29:30.269485+05:30
+Oradebug command 'setmypid' console output: <none>
+
+*** 2026-02-03T20:29:36.833624+05:30
+Processing Oradebug command 'dump hanganalyze 3'
+
+*** 2026-02-03T20:29:36.837514+05:30
+===============================================================================
+HANG ANALYSIS:
+  instances (db_name.oracle_sid): orcldb.orcldb
+  oradebug_node_dump_level: 3
+  os thread scheduling delay history: (sampling every 1.000000 secs)
+    0.000000 secs at [ 20:29:36 ]
+      NOTE: scheduling delay has not been sampled for 0.284305 secs
+    0.000000 secs from [ 20:29:32 - 20:29:37 ], 5 sec avg
+    0.000000 secs from [ 20:28:37 - 20:29:37 ], 1 min avg
+    0.000000 secs from [ 20:24:37 - 20:29:37 ], 5 min avg
+  vktm time drift history
+===============================================================================
+ 
+Chains most likely to have caused the hang:
+ [a] Chain 1 Signature: 'SQL*Net message from client'<='enq: TX - row lock contention'
+     Chain 1 Signature Hash: 0x38c48850
+ [b] Chain 2 Signature: 'SQL*Net message from client'<='enq: TX - row lock contention'
+     Chain 2 Signature Hash: 0x38c48850
+ 
+===============================================================================
+Non-intersecting chains:
+ 
+-------------------------------------------------------------------------------
+Chain 1:
+-------------------------------------------------------------------------------
+    Oracle session identified by:
+    {
+                instance: 1 (orcldb.orcldb)
+                   os id: 23907
+              process id: 67, oracle@oel890-db (TNS V1-V3)
+              session id: 433
+        session serial #: 1602
+             module name: 0 (SQL*Plusoel890-db (TNS V1-V3))
+    }
+    is waiting for 'enq: TX - row lock contention' with wait info:
+    {
+                      p1: 'name|mode'=0x54580004
+                      p2: 'usn<<16 | slot'=0x60011
+                      p3: 'sequence'=0x1e7a
+            time in wait: 1 min 29 sec
+           timeout after: never
+                 wait id: 64
+                blocking: 0 sessions
+          current sql_id: 1175743564
+            wait history:
+              * time between current wait and wait #1: 0.000218 sec
+              1.       event: 'SQL*Net message from client'
+                 time waited: 5.169998 sec
+                     wait id: 63               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #1 and #2: 0.000002 sec
+              2.       event: 'SQL*Net message to client'
+                 time waited: 0.000000 sec
+                     wait id: 62               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #2 and #3: 0.000043 sec
+              3.       event: 'SQL*Net message from client'
+                 time waited: 0.000125 sec
+                     wait id: 61               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+    }
+    and is blocked by
+ => Oracle session identified by:
+    {
+                instance: 1 (orcldb.orcldb)
+                   os id: 36626
+              process id: 44, oracle@oel890-db (TNS V1-V3)
+              session id: 47
+        session serial #: 491
+             module name: 0 (SQL*Plusoel890-db (TNS V1-V3))
+    }
+    which is waiting for 'SQL*Net message from client' with wait info:
+    {
+                      p1: 'driver id'=0x62657100
+                      p2: '#bytes'=0x1
+            time in wait: 3 min 3 sec
+           timeout after: never
+                 wait id: 46
+                blocking: 2 sessions
+          current sql_id: 0
+            wait history:
+              * time between current wait and wait #1: 0.000007 sec
+              1.       event: 'SQL*Net message to client'
+                 time waited: 0.000003 sec
+                     wait id: 45               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #1 and #2: 0.000814 sec
+              2.       event: 'SQL*Net message from client'
+                 time waited: 3.968896 sec
+                     wait id: 44               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #2 and #3: 0.000001 sec
+              3.       event: 'SQL*Net message to client'
+                 time waited: 0.000001 sec
+                     wait id: 43               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+    }
+ 
+Chain 1 Signature: 'SQL*Net message from client'<='enq: TX - row lock contention'
+Chain 1 Signature Hash: 0x38c48850
+-------------------------------------------------------------------------------
+ 
+===============================================================================
+Intersecting chains:
+ 
+-------------------------------------------------------------------------------
+Chain 2:
+-------------------------------------------------------------------------------
+    Oracle session identified by:
+    {
+                instance: 1 (orcldb.orcldb)
+                   os id: 38033
+              process id: 66, oracle@oel890-db (TNS V1-V3)
+              session id: 34
+        session serial #: 59277
+             module name: 0 (SQL*Plusoel890-db (TNS V1-V3))
+    }
+    is waiting for 'enq: TX - row lock contention' with wait info:
+    {
+                      p1: 'name|mode'=0x54580006
+                      p2: 'usn<<16 | slot'=0x60011
+                      p3: 'sequence'=0x1e7a
+            time in wait: 1 min 52 sec
+           timeout after: never
+                 wait id: 31
+                blocking: 0 sessions
+          current sql_id: 277766015
+            wait history:
+              * time between current wait and wait #1: 0.000271 sec
+              1.       event: 'SQL*Net message from client'
+                 time waited: 2.806456 sec
+                     wait id: 30               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #1 and #2: 0.000003 sec
+              2.       event: 'SQL*Net message to client'
+                 time waited: 0.000001 sec
+                     wait id: 29               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+              * time between wait #2 and #3: 0.000076 sec
+              3.       event: 'SQL*Net message from client'
+                 time waited: 0.000169 sec
+                     wait id: 28               p1: 'driver id'=0x62657100
+                                               p2: '#bytes'=0x1
+    }
+    and is blocked by 'instance: 1, os id: 36626, session id: 47',
+    which is a member of 'Chain 1'.
+ 
+Chain 2 Signature: 'SQL*Net message from client'<='enq: TX - row lock contention'
+Chain 2 Signature Hash: 0x38c48850
+-------------------------------------------------------------------------------
+ 
+===============================================================================
+Extra information that will be dumped at higher levels:
+[level  4] :   1 node dumps -- [LEAF] [LEAF_NW] 
+[level  5] :   2 node dumps -- [NO_WAIT] [INVOL_WT] [SINGLE_NODE] [NLEAF] [SINGLE_NODE_NW] 
+ 
+State of ALL nodes
+([nodenum]/cnode/sid/sess_srno/session/ospid/state/[adjlist]):
+[33]/1/34/59277/0x99708ef0/38033/NLEAF/[46]
+[46]/1/47/491/0x997295b8/36626/LEAF/
+[432]/1/433/1602/0x99aecdb8/23907/NLEAF/[46][33]
+
+*** 2026-02-03T20:29:36.838792+05:30
+===============================================================================
+END OF HANG ANALYSIS
+===============================================================================
+
+*** 2026-02-03T20:29:36.838817+05:30
+===============================================================================
+HANG ANALYSIS DUMPS:
+  oradebug_node_dump_level: 3
+===============================================================================
+ 
+State of LOCAL nodes
+([nodenum]/cnode/sid/sess_srno/session/ospid/state/[adjlist]):
+[33]/1/34/59277/0x99708ef0/38033/NLEAF/[46]
+[46]/1/47/491/0x997295b8/36626/LEAF/
+[432]/1/433/1602/0x99aecdb8/23907/NLEAF/[46][33]
+ 
+ 
+No processes qualify for dumping.
+ 
+===============================================================================
+HANG ANALYSIS DUMPS: END
+===============================================================================
+
+*** 2026-02-03T20:29:36.838913+05:30
+Oradebug command 'dump hanganalyze 3' console output: <none>
+
+*** 2026-02-03T20:29:41.904513+05:30
+Processing Oradebug command 'tracefile_name'
+
+*** 2026-02-03T20:29:41.904659+05:30
+Oradebug command 'tracefile_name' console output: 
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_38949_HANGA.trc

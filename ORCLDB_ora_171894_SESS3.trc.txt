@@ -1,0 +1,75 @@
+Trace file /u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_171894_SESS3.trc
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.22.0.0.0
+Build label:    RDBMS_19.22.0.0.0DBRU_LINUX.X64_231229
+ORACLE_HOME:    /u01/app/oracle/product/19.0.0/dbhome_1
+System name:	Linux
+Node name:	oel890-db
+Release:	5.15.0-200.131.27.el8uek.x86_64
+Version:	#2 SMP Wed Oct 4 22:19:10 PDT 2023
+Machine:	x86_64
+CLID:	P
+Instance name: ORCLDB
+Redo thread mounted by this instance: 1
+Oracle process number: 72
+Unix process pid: 171894, image: oracle@oel890-db (TNS V1-V3)
+
+
+*** 2026-02-03T23:34:56.584982+05:30
+*** SESSION ID:(48.35671) 2026-02-03T23:34:56.585010+05:30
+*** CLIENT ID:() 2026-02-03T23:34:56.585020+05:30
+*** SERVICE NAME:(SYS$USERS) 2026-02-03T23:34:56.585030+05:30
+*** MODULE NAME:(SQL*Plus) 2026-02-03T23:34:56.585039+05:30
+*** ACTION NAME:() 2026-02-03T23:34:56.585048+05:30
+*** CLIENT DRIVER:(SQL*PLUS) 2026-02-03T23:34:56.585057+05:30
+ 
+=====================
+PARSING IN CURSOR #140143016708064 len=73 dep=0 uid=110 oct=47 lid=110 tim=13999886069 hv=927546705 ad='66ba4190' sqlid='2xd2r3wvnkgaj'
+BEGIN dbms_session.SESSION_TRACE_ENABLE(WAITS=>FALSE, BINDS=>TRUE); END;
+
+END OF STMT
+EXEC #140143016708064:c=0,e=1153,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=13999886061
+CLOSE #140143016708064:c=17,e=17,dep=0,type=0,tim=13999887154
+=====================
+PARSING IN CURSOR #140143016708064 len=23 dep=0 uid=110 oct=47 lid=110 tim=13999887287 hv=1681009820 ad='7180c600' sqlid='9864w61k34b4w'
+BEGIN :x := 1001; END;
+
+END OF STMT
+PARSE #140143016708064:c=54,e=54,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=13999887287
+BINDS #140143016708064:
+
+ Bind#0
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=03 fl2=1400000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7f7596a3fdd8  bln=22  avl=00  flg=05
+EXEC #140143016708064:c=650,e=650,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=13999888025
+CLOSE #140143016708064:c=0,e=11,dep=0,type=0,tim=13999888300
+=====================
+PARSING IN CURSOR #140143016708064 len=45 dep=0 uid=110 oct=3 lid=110 tim=13999888931 hv=2514064785 ad='785715e8' sqlid='f3dpknkaxm5cj'
+SELECT count(*) FROM test_table WHERE slno=:x
+END OF STMT
+PARSE #140143016708064:c=0,e=520,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=1,plh=0,tim=13999888931
+BINDS #140143016708064:
+
+ Bind#0
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=03 fl2=1000000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7f7596a3fdd8  bln=22  avl=03  flg=05
+  value=1001
+EXEC #140143016708064:c=995,e=1113,p=0,cr=0,cu=0,mis=1,r=0,dep=0,og=1,plh=1774683539,tim=13999890160
+FETCH #140143016708064:c=0,e=16,p=0,cr=2,cu=0,mis=0,r=1,dep=0,og=1,plh=1774683539,tim=13999890215
+STAT #140143016708064 id=1 cnt=1 pid=0 pos=1 obj=0 op='SORT AGGREGATE (cr=2 pr=0 pw=0 str=1 time=22 us)'
+STAT #140143016708064 id=2 cnt=3 pid=1 pos=1 obj=93342 op='INDEX RANGE SCAN IDX_TEST_TABLE (cr=2 pr=0 pw=0 str=1 time=12 us cost=1 size=20 card=5)'
+FETCH #140143016708064:c=0,e=0,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=0,plh=1774683539,tim=13999890432
+CLOSE #140143016708064:c=29,e=29,dep=0,type=0,tim=13999890753
+=====================
+PARSE ERROR #140143016708064:len=25 dep=0 uid=110 oct=3 lid=110 tim=13999891075 err=942
+SELECT * FROM test_table1 
+CLOSE #140143016708064:c=3,e=3,dep=0,type=0,tim=13999891352
+=====================
+PARSING IN CURSOR #140143016708064 len=47 dep=0 uid=110 oct=47 lid=110 tim=13999892607 hv=550348806 ad='769d4088' sqlid='4pb73mchcva06'
+BEGIN dbms_session.SESSION_TRACE_DISABLE; END;
+
+END OF STMT
+PARSE #140143016708064:c=27,e=28,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=13999892607
+EXEC #140143016708064:c=316,e=316,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=13999892962
