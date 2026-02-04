@@ -1,0 +1,41 @@
+SQL> SET timing ON
+SQL> alter session set tracefile_identifier='SESS2';
+
+Session altered.
+
+Elapsed: 00:00:00.00
+SQL> exec dbms_session.SESSION_TRACE_ENABLE(WAITS=>TRUE, BINDS=>TRUE);
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.00
+SQL> DECLARE
+  2          v_sql VARCHAR2(100);
+  3  BEGIN
+  4          FOR I IN 1001..2000
+  5          LOOP
+  6                  v_sql := 'INSERT INTO TEST_TABLE VALUES ('||i||',''TEST'',SYSDATE)';
+  7                  execute immediate v_sql;
+  8          END LOOP;
+  9          COMMIT;
+ 10          DBMS_LOCK.SLEEP(20);
+ 11  END;
+ 12  /
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:20.63
+SQL> exec dbms_session.SESSION_TRACE_DISABLE;
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.00
+SQL> SELECT value FROM v$diag_info WHERE name='Default Trace File';
+
+VALUE
+--------------------------------------------------------------------------
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_53980_SESS2.trc
+
+Elapsed: 00:00:00.01
+SQL> quit
+

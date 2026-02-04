@@ -1,0 +1,5 @@
+SQL> alter system set events '942 trace name processstate level 10';
+
+System altered.
+
+SQL>

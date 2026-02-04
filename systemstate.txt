@@ -1,0 +1,85 @@
+SQL> conn test/test
+Connected.
+SQL> create table test_t (x number primary key, y varchar2(10));
+
+Table created.
+
+SQL> insert into test_t values (1,'TEST1');
+
+1 row created.
+
+SQL> insert into test_t values (2,'TEST2');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select distinct sid from v$mystat;
+
+       SID
+----------
+        47
+
+SQL> delete from test_t where x=1;
+
+1 row deleted.
+
+SQL>
+
+===============================
+
+SQL> conn test1/test1;
+Connected.
+SQL> select distinct sid from v$mystat;
+
+       SID
+----------
+        34
+
+SQL> update test.test_t set y='YYY1' where x=1;
+
+===============================
+
+SQL> conn test2/test2
+Connected.
+SQL> select distinct sid from v$mystat;
+
+       SID
+----------
+       433
+
+SQL> insert into test.test_t values (1,'TEST123');
+
+
+===============================
+
+SQL> alter session set tracefile_identifier='HANGA';
+
+Session altered.
+
+SQL> oradebug setmypid
+Statement processed.
+SQL> oradebug dump hanganalyze 3
+Statement processed.
+SQL> oradebug tracefile_name
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_38949_HANGA.trc
+SQL> quit
+
+
+================================
+
+SQL> alter session set tracefile_identifier='SSD';
+
+Session altered.
+
+SQL> oradebug setmypid
+Statement processed.
+SQL> oradebug dump systemstate 266
+Statement processed.
+SQL> oradebug tracefile_name
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_39663_SSD.trc
+SQL> quit
+
+================================

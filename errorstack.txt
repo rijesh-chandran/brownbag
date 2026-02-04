@@ -1,0 +1,19 @@
+SQL> alter session set events '8104 trace name errorstack level 3';
+
+Session altered.
+
+SQL> alter table TEST.TEST_TABLE move tablespace users online;
+alter table TEST.TEST_TABLE move tablespace users online
+*
+ERROR at line 1:
+ORA-08104: this index object 93342 is being online built or rebuilt
+
+
+
+SQL> SELECT value FROM v$diag_info WHERE name='Default Trace File';
+
+VALUE
+-------------------------------------------------------------------
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_11166.trc
+
+SQL>

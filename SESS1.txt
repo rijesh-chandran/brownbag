@@ -1,0 +1,38 @@
+SQL> SET timing ON
+SQL> alter session set tracefile_identifier='SESS1';
+
+Session altered.
+
+Elapsed: 00:00:00.00
+SQL> exec dbms_session.SESSION_TRACE_ENABLE(WAITS=>TRUE, BINDS=>TRUE);
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.01
+SQL> BEGIN
+  2          FOR I IN 1..1000
+  3          LOOP
+  4                  INSERT INTO TEST_TABLE VALUES (i,'TEST',SYSDATE);
+  5                  COMMIT;
+  6          END LOOP;
+  7          DBMS_LOCK.SLEEP(15);
+  8  END;
+  9  /
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:15.24
+SQL> exec dbms_session.SESSION_TRACE_DISABLE;
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.00
+SQL> SELECT value FROM v$diag_info WHERE name='Default Trace File';
+
+VALUE
+--------------------------------------------------------------------------
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_53279_SESS1.trc
+
+Elapsed: 00:00:00.01
+SQL>
+

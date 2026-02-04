@@ -1,0 +1,38 @@
+SQL> SET timing ON
+SQL> alter session set tracefile_identifier='SESS3';
+
+Session altered.
+
+SQL> exec dbms_session.SESSION_TRACE_ENABLE(WAITS=>FALSE, BINDS=>TRUE);
+
+PL/SQL procedure successfully completed.
+
+SQL> var x number;
+SQL> exec :x := 1001;
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT count(*) FROM test_table WHERE slno=:x;
+
+  COUNT(*)
+----------
+         3
+
+SQL> SELECT * FROM test_table1;
+SELECT * FROM test_table1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> exec dbms_session.SESSION_TRACE_DISABLE;
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT value FROM v$diag_info WHERE name='Default Trace File';
+
+VALUE
+--------------------------------------------------------------------------
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_171894_SESS3.trc
+
+SQL> quit
