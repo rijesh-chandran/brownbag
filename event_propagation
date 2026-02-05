@@ -1,0 +1,11 @@
+SQL> SELECT pi.ksppinm ParameterName, pcv.ksppstvl SessVal, psv.ksppstvl InstVal,pcv.KSPPSTDF "DefaultValue",
+  2  decode(bitand(pi.ksppiflg/256,1),1,'TRUE','FALSE') IS_SESSION_MODIFIABLE,
+  3  decode(bitand(pi.ksppiflg/65536,3),1,'IMMEDIATE',2,'DEFERRED',3,'IMMEDIATE','FALSE') IS_SYSTEM_MODIFIABLE
+  4  FROM x$ksppi pi, x$ksppcv pcv, x$ksppsv psv
+  5  WHERE pi.indx = pcv.indx AND pi.indx = psv.indx AND pi.ksppinm in ('_evt_system_event_propagation');
+
+PARAMETERNAME                  SESSVAL    INSTVAL   DefaultValue  IS_SESSION_MODIFIABL IS_SYSTEM_MODIFIABLE
+------------------------------ ---------- --------- ------------- -------------------- --------------------
+_evt_system_event_propagation  TRUE       TRUE      TRUE          TRUE                 IMMEDIATE
+
+SQL>
