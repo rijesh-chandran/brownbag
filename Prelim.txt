@@ -1,0 +1,39 @@
+[oracle@oel890-db ~]$ sqlplus /nolog
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Jan 31 17:02:46 2026
+Version 19.22.0.0.0
+
+Copyright (c) 1982, 2023, Oracle.  All rights reserved.
+
+SQL>
+SQL> set _prelim on
+SQL> connect / as sysdba
+Prelim connection established
+SQL>
+SQL> oradebug setmypid
+Statement processed.
+SQL> oradebug dump hanganalyze 3
+Statement processed.
+SQL> oradebug tracefile_name
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_230161.trc
+SQL> quit
+Disconnected from ORACLE
+[oracle@oel890-db ~]$
+
+
+[oracle@oel890-db ~]$ sqlplus -prelim / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Jan 31 17:05:48 2026
+Version 19.22.0.0.0
+
+Copyright (c) 1982, 2023, Oracle.  All rights reserved.
+
+SQL> oradebug setmypid
+Statement processed.
+SQL> oradebug dump hanganalyze 3
+Statement processed.
+SQL> oradebug tracefile_name
+/u01/app/oracle/diag/rdbms/orcldb/ORCLDB/trace/ORCLDB_ora_231420.trc
+SQL> quit
+Disconnected from ORACLE
+[oracle@oel890-db ~]$
