@@ -1,0 +1,8 @@
+[oracle@oel890-db oracle]$ tkprof ORCLDB_ora_53279_SESS1.trc ORCLDB_ora_53279_SESS1.tkp_out sort=fchela,exeela,prsela sys=no
+
+TKPROF: Release 19.0.0.0.0 - Development on Thu Feb 5 14:54:04 2026
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+
+[oracle@oel890-db oracle]$
